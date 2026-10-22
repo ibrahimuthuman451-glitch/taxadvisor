@@ -1,0 +1,81 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 210 40% 98%;
+    --foreground: 222 47% 11%;
+    --card: 0 0% 100%;
+    --card-foreground: 222 47% 11%;
+    --primary: 222 47% 11%;
+    --primary-foreground: 210 40% 98%;
+    --secondary: 210 40% 96%;
+    --secondary-foreground: 222 47% 11%;
+    --muted: 210 40% 96%;
+    --muted-foreground: 215 16% 42%;
+    --accent: 160 84% 32%;
+    --accent-foreground: 0 0% 100%;
+    --destructive: 350 84% 40%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 214 32% 91%;
+    --input: 214 32% 88%;
+    --ring: 160 84% 32%;
+    --radius: 0.75rem;
+    --font-sans: "Inter", "Segoe UI", system-ui, -apple-system, sans-serif;
+  }
+
+  * {
+    @apply border-border;
+  }
+
+  html {
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    @apply bg-background text-foreground antialiased;
+    font-feature-settings: "cv11", "ss01";
+  }
+
+  ::selection {
+    background: #a7f3d0;
+    color: #0f172a;
+  }
+}
+
+@layer components {
+  .surface-grid {
+    background-image:
+      linear-gradient(to right, rgba(15, 23, 42, 0.04) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(15, 23, 42, 0.04) 1px, transparent 1px);
+    background-size: 32px 32px;
+  }
+
+  .kpi-value {
+    @apply text-2xl font-semibold tracking-tight tabular-nums;
+  }
+
+  .cell-input {
+    @apply w-full rounded-md border border-transparent bg-transparent px-2 py-1 text-sm outline-none transition-colors hover:border-border focus:border-accent focus:bg-white focus:ring-2 focus:ring-accent/20;
+  }
+
+  .cell-input-error {
+    @apply border-risk/40 bg-risk-soft/60 focus:border-risk focus:ring-risk/20;
+  }
+
+  .cell-input-warning {
+    @apply border-warning/40 bg-warning-soft/70 focus:border-warning focus:ring-warning/20;
+  }
+
+  .scrollbar-thin {
+    scrollbar-width: thin;
+    scrollbar-color: #cbd5e1 transparent;
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}
