@@ -246,13 +246,16 @@ export function parseDateInput(
     return excelSerialToIso(value);
   }
 
-  const raw = String(value)
+  let raw = String(value)
     .normalize("NFKC")
     .replace(ZERO_WIDTH, "")
     .replace(/\u00a0/g, " ")
     .trim()
     .replace(/^["']|["']$/g, "");
   if (!raw) return null;
+
+  // Slash/dot timestamps ("01/10/2026 09:12") — drop the clock before parsing.
+  raw = raw.replace(/\s+\d{1,2}:\d{2}(:\d{2})?(\.\d+)?\s*(am|pm)?$/i, "");
 
   // ISO 8601 (optionally with time component)
   const isoMatch = /^(\d{4})-(\d{1,2})-(\d{1,2})(?:[T\s].*)?$/.exec(raw);

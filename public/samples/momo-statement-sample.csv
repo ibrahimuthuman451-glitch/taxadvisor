@@ -1,0 +1,7 @@
+MTN MoMo Pay - Merchant Statement,,,,,,,
+Merchant: Nyamirambo Fresh Foods Ltd,TIN: 102345678,,,,,,
+Financial Transaction ID,Date,Amount,Currency,Type,Payer Message,Sender,Sender TIN
+MP2610010001,01/10/2026 09:12,285000,RWF,Collection,Groceries,Jean Claude Niyonzima,103456789
+MP2610030002,03/10/2026 12:45,141600,RWF,Collection,Wholesale order,Alice Mukamana,104567890
+MP2610050003,05/10/2026 16:20,200000,RWF,Collection,Event catering,Eric Habimana,105678901
+MP2610070004,07/10/2026 10:05,100000,RWF,Collection,Weekly stock,Claudine Uwera,106789012

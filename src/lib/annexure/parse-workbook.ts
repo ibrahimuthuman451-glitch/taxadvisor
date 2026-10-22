@@ -173,6 +173,26 @@ export function parseTabularFile(buffer: ArrayBuffer, fileName: string): ParsedT
   throw new Error(`Unsupported file type ".${extension}". Upload an .xlsx, .xls or .csv export.`);
 }
 
+/**
+ * Low-level table reader shared by the annexure and reconciliation pipelines.
+ * Returns raw rows so callers can run their own header detection.
+ */
+export function readTabularFile(
+  buffer: ArrayBuffer,
+  fileName: string,
+): { rows: unknown[][]; sheetName: string | null; warnings: string[] } {
+  const extension = fileName.split(".").pop()?.toLowerCase() ?? "";
+  if (extension === "csv" || extension === "txt" || extension === "tsv") {
+    const parsed = parseCsv(buffer);
+    return { rows: parsed.rows, sheetName: null, warnings: parsed.warnings };
+  }
+  if (["xlsx", "xlsm", "xls", "ods"].includes(extension)) {
+    const parsed = parseExcel(buffer);
+    return { rows: parsed.rows, sheetName: parsed.sheetName, warnings: parsed.warnings };
+  }
+  throw new Error(`Unsupported file type ".${extension}". Upload an .xlsx, .xls or .csv export.`);
+}
+
 /** Full pipeline: bytes + type → mapped, normalized rows ready for validation. */
 export function parseAnnexureFile(params: {
   buffer: ArrayBuffer;
